@@ -1,0 +1,73 @@
+{% extends "grader/base.html" %}
+{% block title %}Grade a submission{% endblock %}
+{% block content %}
+<div class="grid-2">
+  <section class="card">
+    <h1>Grade a C submission</h1>
+    <p class="muted">Pick the instructor's rules, upload one or more <code>.c</code> files (or paste code). The agent compiles and runs it in a sandbox, checks every metric in the rules and returns one reproducible grade with feedback.</p>
+    {% if not rules %}
+      <div class="msg msg-error">No valid rules files in <code>rules/</code>. <a href="{% url 'rules_new' %}">Create one</a>.</div>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data" class="form" id="upload-form">
+      {% csrf_token %}
+      <label class="field">
+        <span>Rules / problem</span>
+        <select name="rules_file" required>
+          {% for r in rules %}
+            <option value="{{ r.file }}" {% if r.file == selected %}selected{% endif %}>{{ r.problem }} · {{ r.metrics|length }} metrics · {{ r.time_limit_s }}s / {{ r.memory_limit_mb }} MB</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label class="field">
+        <span>Student (optional)</span>
+        <input type="text" name="student" placeholder="e.g. roll number" maxlength="120">
+      </label>
+      <label class="drop" id="drop">
+        <input type="file" name="files" accept=".c" multiple id="files">
+        <strong>Drop .c files here</strong> or click to choose
+        <span class="muted" id="file-list">Several files = batch grading</span>
+      </label>
+      <details class="paste">
+        <summary>…or paste code</summary>
+        <input type="text" name="paste_name" placeholder="filename.c" value="pasted.c">
+        <textarea name="code" rows="10" spellcheck="false" placeholder="#include &lt;stdio.h&gt;&#10;int main(void) { ... }"></textarea>
+      </details>
+      <button class="btn btn-primary" type="submit">Grade</button>
+    </form>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>What the agent does</h2>
+      <ol class="pipeline">
+        <li><b>First pass:</b> compile, smoke run with the sample input under the time/memory cap, static sanity (main, reads input, writes output, no <code>system()</code>/<code>fork()</code>). Hangs or crashes still produce a partial report.</li>
+        <li><b>Dispatch:</b> every metric in the rules goes to its own analyzer: hidden tests, compiler warnings, lizard structure, modularity, generated corner cases with qwen3 counter-tests, timing-curve complexity, ASan/UBSan and leak checks, Groq readability, abstract-structure originality.</li>
+        <li><b>Collate:</b> weighted grade, failing inputs beside the expected output with WHY and an AI-tutor note, suggestions, JSON and text reports.</li>
+      </ol>
+    </div>
+    {% if recent %}
+    <div class="card">
+      <h2>Recent</h2>
+      <table class="table compact">
+        {% for s in recent %}
+        <tr>
+          <td><a href="{% url 'submission' s.pk %}">#{{ s.pk }} {{ s.filename }}</a><div class="muted small">{{ s.problem }}{% if s.student %} · {{ s.student }}{% endif %}</div></td>
+          <td class="num">{% if s.grade is not None %}<span class="grade-chip {% if s.grade >= 85 %}good{% elif s.grade >= 60 %}ok{% else %}bad{% endif %}">{{ s.grade|floatformat:1 }}</span>{% else %}<span class="pill">{{ s.status }}</span>{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+  const input = document.getElementById('files'), drop = document.getElementById('drop'), list = document.getElementById('file-list');
+  const show = () => { list.textContent = input.files.length ? [...input.files].map(f => f.name).join(', ') : 'Several files = batch grading'; };
+  input.addEventListener('change', show);
+  ['dragenter', 'dragover'].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', ev => { input.files = ev.dataTransfer.files; show(); });
+</script>
+{% endblock %}

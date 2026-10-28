@@ -1,0 +1,541 @@
+{
+  "submission": "add.c",
+  "submission_sha256": "05867b29ae50ad0469baea30425ed1edf2d050819dcf043c580b274e571cdf21",
+  "problem": "add_two_integers",
+  "rules_file": "/Users/harsha_vrdn/Dev/autograder/rules/add_two_integers.json",
+  "rules_hash": "sha256:e818caa87e0df4f079768c6eb3d5c64c8385bf397fc12e1b60bd3ca5cfb7c87f",
+  "inputs_hash": "sha256:a820291f7668f3eb0cfa72eac46c0a88f2aa84a3e3d0d61b42dd694988fde3dc",
+  "grade": 75.72,
+  "max_grade": 100,
+  "status": "graded",
+  "first_pass": {
+    "compiled": true,
+    "compile_warnings": 0,
+    "compile_errors": [],
+    "smoke_ok": true,
+    "suspected_infinite_loop": false,
+    "crashes_on_sample": false,
+    "unsafe_calls": [],
+    "static": {
+      "has_main": true,
+      "reads_input": true,
+      "writes_output": true,
+      "returns_in_main": true
+    },
+    "compile_command": "cc -O2 -Wall -Wextra -std=c11 main.c -o sub_main -lm",
+    "compile_failed": false,
+    "smoke": {
+      "verdict": "OK",
+      "status": "exit 0",
+      "cpu_s": 0.0034,
+      "max_rss_mb": 1.55,
+      "matches_sample": true
+    }
+  },
+  "metrics": [
+    {
+      "name": "correctness",
+      "analyzer": "io_tests",
+      "weight": 0.2,
+      "score": 0.8,
+      "contribution": 16.0,
+      "verdict": "8 of 10 tests pass",
+      "feedback": "8/10 tests pass. First failure: test 07 (WA).",
+      "evidence": {
+        "tests_passed": 8,
+        "tests_total": 10,
+        "per_test": [
+          {
+            "test": "01",
+            "verdict": "AC",
+            "cpu_s": 0.004,
+            "wall_s": 0.006,
+            "max_rss_mb": 1.55
+          },
+          {
+            "test": "02",
+            "verdict": "AC",
+            "cpu_s": 0.0045,
+            "wall_s": 0.0062,
+            "max_rss_mb": 1.55
+          },
+          {
+            "test": "03",
+            "verdict": "AC",
+            "cpu_s": 0.0043,
+            "wall_s": 0.0061,
+            "max_rss_mb": 1.55
+          },
+          {
+            "test": "04",
+            "verdict": "AC",
+            "cpu_s": 0.0048,
+            "wall_s": 0.0064,
+            "max_rss_mb": 1.55
+          },
+          {
+            "test": "05",
+            "verdict": "AC",
+            "cpu_s": 0.0042,
+            "wall_s": 0.0061,
+            "max_rss_mb": 1.55
+          },
+          {
+            "test": "06",
+            "verdict": "AC",
+            "cpu_s": 0.0034,
+            "wall_s": 0.0051,
+            "max_rss_mb": 1.56
+          },
+          {
+            "test": "07",
+            "verdict": "WA",
+            "cpu_s": 0.0045,
+            "wall_s": 0.0065,
+            "max_rss_mb": 1.55
+          },
+          {
+            "test": "08",
+            "verdict": "WA",
+            "cpu_s": 0.0024,
+            "wall_s": 0.005,
+            "max_rss_mb": 1.55
+          },
+          {
+            "test": "09",
+            "verdict": "AC",
+            "cpu_s": 0.0028,
+            "wall_s": 0.0052,
+            "max_rss_mb": 1.55
+          },
+          {
+            "test": "10",
+            "verdict": "AC",
+            "cpu_s": 0.0027,
+            "wall_s": 0.0052,
+            "max_rss_mb": 1.55
+          }
+        ],
+        "compare_mode": "tokens"
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "syntax",
+      "analyzer": "compiler_warnings",
+      "weight": 0.1,
+      "score": 1.0,
+      "contribution": 10.0,
+      "verdict": "clean",
+      "feedback": "Compiles cleanly.",
+      "evidence": {
+        "warnings": [],
+        "flags": "-Wall -Wextra -Werror -std=c11",
+        "would_fail_werror": false
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "structure",
+      "analyzer": "static_analysis",
+      "weight": 0.1,
+      "score": 0.7,
+      "contribution": 7.0,
+      "verdict": "No comments at all; All logic is in a single block (main only).",
+      "feedback": "No comments at all: document what the program and each function does. All logic is in a single block (main only).",
+      "evidence": {
+        "functions": [
+          {
+            "name": "main",
+            "cyclomatic": 1,
+            "nloc": 6,
+            "length": 6,
+            "start_line": 2,
+            "params": 0
+          }
+        ],
+        "max_cyclomatic": 8,
+        "max_function_length": 40,
+        "comment_count": 0,
+        "globals": [],
+        "cppcheck": [],
+        "deductions": [
+          {
+            "points": 0.2,
+            "reason": "No comments at all: document what the program and each function does."
+          },
+          {
+            "points": 0.1,
+            "reason": "All logic is in a single block (main only)."
+          }
+        ]
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "modularity",
+      "analyzer": "function_split",
+      "weight": 0.1,
+      "score": 0.3,
+      "contribution": 3.0,
+      "verdict": "only main() is defined",
+      "feedback": "1 function(s) defined (main); expected at least 2. Only main() is defined.",
+      "evidence": {
+        "functions_defined": 1,
+        "expected_min": 2,
+        "functions": [
+          "main"
+        ],
+        "main_share": 1.0,
+        "unused": []
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "logical",
+      "analyzer": "edge_case_runner",
+      "weight": 0.1,
+      "score": 0.7222,
+      "contribution": 7.22,
+      "verdict": "int_overflow not handled, llm not handled",
+      "feedback": "13/18 corner cases pass; fails on: int_overflow, llm.",
+      "evidence": {
+        "oracle": "reference_solution",
+        "per_category": {
+          "negatives": {
+            "passed": 4,
+            "total": 4
+          },
+          "zero": {
+            "passed": 3,
+            "total": 3
+          },
+          "int_overflow": {
+            "passed": 1,
+            "total": 5
+          },
+          "whitespace": {
+            "passed": 3,
+            "total": 3
+          },
+          "llm": {
+            "passed": 2,
+            "total": 3
+          }
+        },
+        "cases_run": 18,
+        "llm": {
+          "used": true,
+          "model": "qwen3:4b",
+          "cached": true,
+          "proposed": 5,
+          "accepted": 3,
+          "rejected_invalid": 2
+        }
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "complexity",
+      "analyzer": "complexity_estimator",
+      "weight": 0.1,
+      "score": 1.0,
+      "contribution": 10.0,
+      "verdict": "O(1) confirmed (required O(1))",
+      "feedback": "Estimated O(1) (input has no size parameter and run time is constant); static analysis: max loop nesting 0. Required O(1).",
+      "evidence": {
+        "required": "O(1)",
+        "estimated": "O(1)",
+        "timings": [
+          {
+            "n": 1,
+            "cpu_s": 0.0023,
+            "max_rss_mb": 1.55
+          },
+          {
+            "n": 10,
+            "cpu_s": 0.0022,
+            "max_rss_mb": 1.55
+          },
+          {
+            "n": 100,
+            "cpu_s": 0.0022,
+            "max_rss_mb": 1.55
+          }
+        ],
+        "slope": 0.0,
+        "conclusive": false,
+        "timed_out_at": null,
+        "crashed_at": null,
+        "static_estimate": "O(1)",
+        "static_reason": "max loop nesting 0"
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "memory_safety",
+      "analyzer": "sanitizer_run",
+      "weight": 0.1,
+      "score": 0.75,
+      "contribution": 7.5,
+      "verdict": "undefined-behaviour",
+      "feedback": "undefined-behaviour at line 5: signed integer overflow: 2147483647 + 1 cannot be represented in type 'int'",
+      "evidence": {
+        "inputs_checked": 10,
+        "issues": [
+          {
+            "kind": "undefined-behaviour",
+            "line": 5,
+            "detail": "signed integer overflow: 2147483647 + 1 cannot be represented in type 'int'",
+            "input": "07"
+          }
+        ],
+        "leak_check": {
+          "tool": "macOS leaks",
+          "leaked_bytes": 0
+        },
+        "flags": "-fsanitize=address,undefined"
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "readability",
+      "analyzer": "llm_review",
+      "weight": 0.1,
+      "score": 0.5,
+      "contribution": 5.0,
+      "verdict": "single-letter variable names (a,b), no comments explaining p",
+      "feedback": "Readability 5/10: single-letter variable names (a,b); no comments explaining purpose; inconsistent indentation and brace placement.",
+      "evidence": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-120b",
+        "temperature": 0.0,
+        "seed": 42,
+        "cached": true,
+        "raw_response": "{\"score\":5,\"reasons\":[\"single-letter variable names (a,b)\",\"no comments explaining purpose\",\"inconsistent indentation and brace placement\"],\"suggestions\":[\"Rename variables to descriptive names, e.g., change line 3 to \\\"int operand1, operand2;\\\"\",\"Add a brief comment above main, e.g., line 2: \\\"// Reads two integers and prints their sum\\\"\",\"Place opening brace on its own line and use consistent indentation, e.g., line 2 becomes \\\"int main()\\\\n{\\\" and indent inner lines uniformly (4 spaces)\"]}"
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "originality",
+      "analyzer": "similarity_flag",
+      "weight": 0.1,
+      "score": 1.0,
+      "contribution": 10.0,
+      "verdict": "too little unique code to judge",
+      "feedback": "Program is too short to judge originality (32 abstract tokens, 11 k-grams outside the base code; need 50/8). Top match 1.00 is reported but not flagged.",
+      "evidence": {
+        "max_similarity": 0.0,
+        "threshold": 0.85,
+        "judgeable": false,
+        "unique_kgrams": 11,
+        "abstract_tokens": 32,
+        "base_kgrams_excluded": 17,
+        "top_matches": [
+          {
+            "path": "corpus/llm_generated/add_two_integers/qwen3_4b_seed1.c",
+            "origin": "llm",
+            "similarity": 1.0,
+            "token_jaccard": 1.0,
+            "skeleton_ratio": 1.0
+          },
+          {
+            "path": "corpus/llm_generated/add_two_integers/qwen3_4b_seed2.c",
+            "origin": "llm",
+            "similarity": 1.0,
+            "token_jaccard": 1.0,
+            "skeleton_ratio": 1.0
+          },
+          {
+            "path": "corpus/llm_generated/add_two_integers/qwen3_4b_seed3.c",
+            "origin": "llm",
+            "similarity": 1.0,
+            "token_jaccard": 1.0,
+            "skeleton_ratio": 1.0
+          },
+          {
+            "path": "submissions/add_two_integers/add_syntax_error.c",
+            "origin": "peer",
+            "similarity": 0.6,
+            "token_jaccard": 0.467,
+            "skeleton_ratio": 1.0
+          },
+          {
+            "path": "submissions/add_two_integers/add_infinite.c",
+            "origin": "peer",
+            "similarity": 0.448,
+            "token_jaccard": 0.348,
+            "skeleton_ratio": 0.75
+          }
+        ],
+        "corpus_size": 7,
+        "corpus_hash": "1c441078ecd23214",
+        "llm_reference": {
+          "used": true,
+          "files": 3,
+          "generated_now": 0,
+          "model": "qwen3:4b"
+        }
+      },
+      "skipped": false,
+      "unavailable": false
+    }
+  ],
+  "failures": [
+    {
+      "metric": "correctness",
+      "test": "07",
+      "input": "2147483647 1",
+      "expected": "2147483648",
+      "got": "-2147483648",
+      "verdict": "WA",
+      "status": "exit 0",
+      "note": "The correct result does not fit in a 32-bit int, so the computation wrapped around (signed integer overflow is undefined behaviour in C). Use a wider type such as long long for the result, or check the operands before the operation.",
+      "sanitizer": "runtime error at line 5: signed integer overflow: 2147483647 + 1 cannot be represented in type 'int'",
+      "llm_explanation": "The sum of 2147483647 and 1 exceeds the maximum value for a 32-bit signed integer, causing an overflow. Fix: Use a 64-bit integer type for the sum to handle the larger result."
+    },
+    {
+      "metric": "correctness",
+      "test": "08",
+      "input": "-2147483648 -1",
+      "expected": "-2147483649",
+      "got": "2147483647",
+      "verdict": "WA",
+      "status": "exit 0",
+      "note": "The correct result does not fit in a 32-bit int, so the computation wrapped around (signed integer overflow is undefined behaviour in C). Use a wider type such as long long for the result, or check the operands before the operation.",
+      "sanitizer": "runtime error at line 5: signed integer overflow: -2147483648 + -1 cannot be represented in type 'int'",
+      "llm_explanation": "The sum of -2147483648 and -1 underflows the minimum value for a 32-bit signed integer, causing an overflow. Fix: Use a 64-bit integer type for the sum to handle the smaller result."
+    },
+    {
+      "metric": "logical",
+      "category": "int_overflow",
+      "input": "2147483647 2147483647",
+      "expected": "4294967294",
+      "got": "-2",
+      "verdict": "WA",
+      "status": "exit 0",
+      "llm_reason": null,
+      "note": "The correct result does not fit in a 32-bit int, so the computation wrapped around (signed integer overflow is undefined behaviour in C). Use a wider type such as long long for the result, or check the operands before the operation.",
+      "sanitizer": "runtime error at line 5: signed integer overflow: 2147483647 + 2147483647 cannot be represented in type 'int'",
+      "llm_explanation": "The sum of two maximum 32-bit signed integers (2147483647) exceeds the range of a 32-bit signed integer, causing an overflow. Fix: Use a 64-bit integer type for the sum to handle the larger result."
+    },
+    {
+      "metric": "logical",
+      "category": "int_overflow",
+      "input": "-2147483648 -2147483648",
+      "expected": "-4294967296",
+      "got": "0",
+      "verdict": "WA",
+      "status": "exit 0",
+      "llm_reason": null,
+      "note": "The correct result does not fit in a 32-bit int, so the computation wrapped around (signed integer overflow is undefined behaviour in C). Use a wider type such as long long for the result, or check the operands before the operation.",
+      "sanitizer": "runtime error at line 5: signed integer overflow: -2147483648 + -2147483648 cannot be represented in type 'int'"
+    }
+  ],
+  "flags": [],
+  "suggestions": [
+    "Move the core computation into its own function (e.g. a helper that takes the inputs and returns the result) and call it from main().",
+    "Rename variables to descriptive names, e.g., change line 3 to \"int operand1, operand2;\"",
+    "Add a brief comment above main, e.g., line 2: \"// Reads two integers and prints their sum\"",
+    "Place opening brace on its own line and use consistent indentation, e.g., line 2 becomes \"int main()\\n{\" and indent inner lines uniformly (4 spaces)",
+    "No comments at all: document what the program and each function does.",
+    "All logic is in a single block (main only).",
+    "Handle overflow explicitly: compute in long long, or check operands against INT_MAX/INT_MIN first.",
+    "Undefined behaviour detected (e.g. signed overflow or invalid shift); see the reported lines."
+  ],
+  "profile": {
+    "tests": {
+      "max_cpu_s": 0.0048,
+      "max_wall_s": 0.0065,
+      "max_rss_mb": 1.56
+    },
+    "scaling": [
+      {
+        "n": 1,
+        "cpu_s": 0.0023,
+        "max_rss_mb": 1.55
+      },
+      {
+        "n": 10,
+        "cpu_s": 0.0022,
+        "max_rss_mb": 1.55
+      },
+      {
+        "n": 100,
+        "cpu_s": 0.0022,
+        "max_rss_mb": 1.55
+      }
+    ]
+  },
+  "usefulness_limitations": {
+    "usefulness": [
+      {
+        "use_case": "Large programming courses (CS1 labs)",
+        "example": "A 300-student lab submits add.c / sum_array.c. The instructor drops the rules file and test folder next to the submissions and batch-grades them with `python manage.py grade submissions/*.c --rules rules/add_two_integers.json` in a few minutes.",
+        "benefit": "Every student gets the same rubric and a per-metric breakdown with the exact failing input (e.g. 2147483647 1 -> expected 2147483648) instead of a bare mark."
+      },
+      {
+        "use_case": "Coding-interview and hiring screens",
+        "example": "A company screens 500 candidates on 'sum an array safely in O(n)'. Candidates with an O(n^2) nested loop are separated by the timing curve, and those with int accumulators by the int_overflow corner cases.",
+        "benefit": "Fast first-round filtering where every rejection can be justified metric by metric with stored evidence."
+      },
+      {
+        "use_case": "Plagiarism and LLM-copy triage",
+        "example": "Two submissions reach 0.93 abstract-structure similarity (> 0.85 threshold) although every variable was renamed and a for-loop rewritten as a while-loop; a third matches a qwen3-generated solution. Only these are flagged.",
+        "benefit": "Instructors review a handful of flagged pairs instead of reading all submissions."
+      },
+      {
+        "use_case": "Self-paced practice with instant feedback",
+        "example": "A student uploads sum_leak.c at midnight; the report shows 'memory-leak at line 14: 400 bytes leaked (macOS leaks)' and a WHY/AI-tutor explanation of the failing case, so they fix it before the deadline.",
+        "benefit": "Teaching-assistant style feedback (ASan/UBSan, leaks, counterexamples) available 24/7 without staff time."
+      }
+    ],
+    "limitations": [
+      {
+        "limitation": "Tests cannot prove correctness",
+        "example": "A submission that special-cases the inputs it has seen (e.g. `if (a == 7 && b == 5) puts(\"12\");` for every hidden test) or that only fails for n = 99991 passes all hidden tests and all generated corner cases and gets a full correctness score.",
+        "mitigation": "Seeded random + LLM-proposed counter-tests are judged against the reference solution, but coverage is still finite; keep hidden tests secret and rotate them."
+      },
+      {
+        "limitation": "Timing-based complexity is unreliable for small inputs",
+        "example": "An O(n^2) solution on sizes [1, 10, 100] runs in < 1 ms at every size; the curve is flat, so the agent falls back to static loop nesting. A loop like `for (i = 0; i < 3; i++)` is counted as O(n) nesting and a recursive merge sort is treated as possibly exponential, giving a wrong complexity verdict.",
+        "mitigation": "Use large sizes (e.g. 10^3..10^6) in the rules, and min-of-N CPU time; treat the complexity score as advisory near class boundaries."
+      },
+      {
+        "limitation": "Similarity cannot judge tiny programs and can miss semantic rewrites",
+        "example": "For add_two_integers almost every token k-gram is shared with the reference solution, so a copied 6-line program is reported as 'too little unique code to judge' and gets 10/10 originality. Conversely, a copy translated into a different algorithm (recursion instead of a loop) scores low similarity and is not flagged.",
+        "mitigation": "Base-code exclusion avoids false positives, but originality is only meaningful for programs with real logic; flags require human review, never automatic penalties."
+      },
+      {
+        "limitation": "Verdicts depend on the compiler and platform",
+        "example": "`while (b != 0) { s += 1; }` never terminates when b != 0, but clang -O2 is allowed (C11 6.8.5p6) to delete the side-effect-free loop, so the smoke run finishes in 6 ms and the agent reports a wrong answer instead of an infinite loop. On macOS RLIMIT_AS is ignored, so the memory cap is enforced by polling: a program that allocates 200 MB and exits within ~5 ms can pass a 64 MB limit, and leaks are only checked (with `leaks`) on the first two inputs.",
+        "mitigation": "Grade on Linux in a container (RLIMIT_AS, LeakSanitizer/valgrind), pin compiler + flags in the rules; tool_versions are recorded in every report."
+      }
+    ]
+  },
+  "notes": [],
+  "tool_versions": {
+    "cc": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+    "lizard": "1.24.3",
+    "python": "3.14.6",
+    "platform": "darwin-arm64",
+    "ollama_model": "qwen3:4b",
+    "groq_model": "openai/gpt-oss-120b",
+    "engine": "1.0.0"
+  },
+  "reproducibility": {
+    "engine_version": "1.0.0",
+    "seeded_generation": true,
+    "llm_cache_dir": ".cache/llm",
+    "offline": false
+  },
+  "duration_s": 6.76
+}

@@ -1,0 +1,14 @@
+services:
+  autograder:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - .:/app            # code, rules, tests, db, reports, uploads and .cache/llm live on the host
+    cap_add:
+      - SYS_PTRACE        # LeakSanitizer needs ptrace inside containers
+    environment:
+      # Ollama running on the host (Docker Desktop / Colima); remove if Ollama is not used
+      OLLAMA_URL: http://host.docker.internal:11434
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

@@ -1,0 +1,33 @@
+{
+  "problem": "sum_array",
+  "statement_file": "problems/sum_array/statement.md",
+  "reference_solution": "problems/sum_array/reference.c",
+  "time_limit_s": 2,
+  "memory_limit_mb": 64,
+  "compile_flags": "-O2 -Wall -Wextra -std=c11",
+  "compare": "tokens",
+  "sample_input": "5\n1 2 3 4 5\n",
+  "sample_output": "15\n",
+  "input_format": {
+    "lines": [
+      [{"name": "n", "type": "int", "min": 0, "max": 1000000}],
+      [{"name": "xs", "type": "int", "repeat": "n"}]
+    ]
+  },
+  "metrics": [
+    {"name": "correctness", "analyzer": "io_tests", "weight": 0.30, "params": {"testset_dir": "tests/sum_array/"}},
+    {"name": "syntax", "analyzer": "compiler_warnings", "weight": 0.05, "params": {"flags": "-Wall -Wextra -std=c11"}},
+    {"name": "structure", "analyzer": "static_analysis", "weight": 0.05, "params": {"max_cyclomatic": 8, "max_function_length": 40}},
+    {"name": "modularity", "analyzer": "function_split", "weight": 0.05, "params": {"expect_helpers": true, "min_functions": 2}},
+    {"name": "logical", "analyzer": "edge_case_runner", "weight": 0.15,
+     "params": {"cases": ["zero", "empty", "single", "negatives", "int_overflow", "boundaries", "whitespace", "large", "llm"], "llm_cases": 4}},
+    {"name": "complexity", "analyzer": "complexity_estimator", "weight": 0.15,
+     "params": {"required": "O(n)", "sizes": [20000, 80000, 320000], "repeats": 3, "time_limit_s": 2}},
+    {"name": "memory_safety", "analyzer": "sanitizer_run", "weight": 0.10,
+     "params": {"flags": "-fsanitize=address,undefined", "leak_check": true}},
+    {"name": "readability", "analyzer": "llm_review", "weight": 0.05,
+     "params": {"model": "openai/gpt-oss-120b", "temperature": 0, "seed": 42}},
+    {"name": "originality", "analyzer": "similarity_flag", "weight": 0.10,
+     "params": {"corpus_dir": "submissions/sum_array/", "flag_threshold": 0.85, "llm_reference_solutions": 3}}
+  ]
+}

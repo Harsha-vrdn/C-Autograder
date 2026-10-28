@@ -1,0 +1,96 @@
+===== Grading report for sum_quadratic.c =====
+Problem: sum_array    Status: graded
+Overall grade: 79.5 / 100
+Rules: /Users/harsha_vrdn/Dev/autograder/rules/sum_array.json (sha256:7ec8b574d943...)  Submission sha256: dc30847fb0f0...
+
+--- First pass ---
+compiled: True   smoke run: exit 0   suspected infinite loop: False
+
+Metric          Weight    Score  Contrib   Verdict
+correctness         30    30/30     30.0   8 of 8 tests pass
+syntax               5      5/5      5.0   clean
+structure            5    4.5/5      4.5   All logic is in a single block (main only).
+modularity           5    1.5/5      1.5   only main() is defined
+logical             15    15/15     15.0   all corner cases pass
+complexity          15     0/15      0.0   O(n^2) exceeds (required O(n))
+memory_safety       10    10/10     10.0   ASan/UBSan clean
+readability          5    3.5/5      3.5   Good overall indentation and spacing, Single helpful comment
+originality         10    10/10     10.0   max similarity 0.47, not flagged
+                                    79.5   = total
+
+--- Profile ---
+hidden tests: max CPU 268.4 ms, max wall 283.5 ms, peak memory 2.0 MB
+n=20000     CPU     11.9 ms   peak 1.7 MB
+n=80000     CPU    160.5 ms   peak 1.9 MB
+
+--- Suggestions to raise the grade ---
+- Your algorithm looks like O(n^2) but O(n) is required; remove nested loops over the input
+  or use a better data structure / precomputation.
+- Move the core computation into its own function (e.g. a helper that takes the inputs and
+  returns the result) and call it from main().
+- Split the one‑line loops onto multiple lines with braces and add comments (e.g., line 9 →
+  `for (int i = 0; i < n; i++) { scanf("%d", &arr[i]); }` and line 13 similarly)
+- Rename variables to be more descriptive, e.g., `int count` instead of `n`, `int *values`
+  instead of `arr`, `long long sum` instead of `total`
+- Add a brief comment before the inner loop explaining its purpose (e.g., line 12: `//
+  Compute prefix sum up to index i`
+- All logic is in a single block (main only).
+
+--- Usefulness & limitations of this evaluation ---
+Useful for:
+  1. Large programming courses (CS1 labs)
+     Example: A 300-student lab submits add.c / sum_array.c. The instructor drops the rules
+     file and test folder next to the submissions and batch-grades them with `python
+     manage.py grade submissions/*.c --rules rules/add_two_integers.json` in a few minutes.
+     Benefit: Every student gets the same rubric and a per-metric breakdown with the exact
+     failing input (e.g. 2147483647 1 -> expected 2147483648) instead of a bare mark.
+  2. Coding-interview and hiring screens
+     Example: A company screens 500 candidates on 'sum an array safely in O(n)'. Candidates
+     with an O(n^2) nested loop are separated by the timing curve, and those with int
+     accumulators by the int_overflow corner cases.
+     Benefit: Fast first-round filtering where every rejection can be justified metric by
+     metric with stored evidence.
+  3. Plagiarism and LLM-copy triage
+     Example: Two submissions reach 0.93 abstract-structure similarity (> 0.85 threshold)
+     although every variable was renamed and a for-loop rewritten as a while-loop; a third
+     matches a qwen3-generated solution. Only these are flagged.
+     Benefit: Instructors review a handful of flagged pairs instead of reading all
+     submissions.
+  4. Self-paced practice with instant feedback
+     Example: A student uploads sum_leak.c at midnight; the report shows 'memory-leak at
+     line 14: 400 bytes leaked (macOS leaks)' and a WHY/AI-tutor explanation of the failing
+     case, so they fix it before the deadline.
+     Benefit: Teaching-assistant style feedback (ASan/UBSan, leaks, counterexamples)
+     available 24/7 without staff time.
+
+Limits of this report:
+  1. Tests cannot prove correctness
+     Example: A submission that special-cases the inputs it has seen (e.g. `if (a == 7 && b
+     == 5) puts("12");` for every hidden test) or that only fails for n = 99991 passes all
+     hidden tests and all generated corner cases and gets a full correctness score.
+     Mitigation: Seeded random + LLM-proposed counter-tests are judged against the reference
+     solution, but coverage is still finite; keep hidden tests secret and rotate them.
+  2. Timing-based complexity is unreliable for small inputs
+     Example: An O(n^2) solution on sizes [1, 10, 100] runs in < 1 ms at every size; the
+     curve is flat, so the agent falls back to static loop nesting. A loop like `for (i = 0;
+     i < 3; i++)` is counted as O(n) nesting and a recursive merge sort is treated as
+     possibly exponential, giving a wrong complexity verdict.
+     Mitigation: Use large sizes (e.g. 10^3..10^6) in the rules, and min-of-N CPU time;
+     treat the complexity score as advisory near class boundaries.
+  3. Similarity cannot judge tiny programs and can miss semantic rewrites
+     Example: For add_two_integers almost every token k-gram is shared with the reference
+     solution, so a copied 6-line program is reported as 'too little unique code to judge'
+     and gets 10/10 originality. Conversely, a copy translated into a different algorithm
+     (recursion instead of a loop) scores low similarity and is not flagged.
+     Mitigation: Base-code exclusion avoids false positives, but originality is only
+     meaningful for programs with real logic; flags require human review, never automatic
+     penalties.
+  4. Verdicts depend on the compiler and platform
+     Example: `while (b != 0) { s += 1; }` never terminates when b != 0, but clang -O2 is
+     allowed (C11 6.8.5p6) to delete the side-effect-free loop, so the smoke run finishes in
+     6 ms and the agent reports a wrong answer instead of an infinite loop. On macOS
+     RLIMIT_AS is ignored, so the memory cap is enforced by polling: a program that
+     allocates 200 MB and exits within ~5 ms can pass a 64 MB limit, and leaks are only
+     checked (with `leaks`) on the first two inputs.
+     Mitigation: Grade on Linux in a container (RLIMIT_AS, LeakSanitizer/valgrind), pin
+     compiler + flags in the rules; tool_versions are recorded in every report.

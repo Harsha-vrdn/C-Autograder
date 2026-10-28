@@ -1,0 +1,92 @@
+===== Grading report for add_infinite.c =====
+Problem: add_two_integers    Status: partial
+Overall grade: 40.0 / 100
+Rules: /Users/harsha_vrdn/Dev/autograder/rules/add_two_integers.json (sha256:e818caa87e0d...)  Submission sha256: c769610589da...
+
+--- First pass ---
+compiled: True   smoke run: time limit exceeded (killed)   suspected infinite loop: True
+
+Metric          Weight    Score  Contrib   Verdict
+correctness         20     0/20      0.0   skipped
+syntax              10    10/10     10.0   clean
+structure           10     9/10      9.0   All logic is in a single block (main only).
+modularity          10     3/10      3.0   only main() is defined
+logical             10     0/10      0.0   skipped
+complexity          10     0/10      0.0   skipped
+memory_safety       10     0/10      0.0   skipped
+readability         10     8/10      8.0   Good use of comments explaining input format and loop behavi
+originality         10    10/10     10.0   too little unique code to judge
+                                    40.0   = total
+
+--- Flags ---
+! [suspected_infinite_loop] Smoke run on the sample input timed out; execution-based analyzers skipped.
+
+--- Suggestions to raise the grade ---
+- Move the core computation into its own function (e.g. a helper that takes the inputs and
+  returns the result) and call it from main().
+- Rename variables to descriptive identifiers, e.g., line 4: int firstNumber, secondNumber;
+  (cite line 4)
+- Add a brief comment before the loop to explain its purpose, e.g., // Consume characters
+  until the terminating period (cite line 6)
+- Consider using a clearer loop condition or function to read the period instead of
+  while(getchar()!='.') (cite line 6)
+- All logic is in a single block (main only).
+
+--- Usefulness & limitations of this evaluation ---
+Useful for:
+  1. Large programming courses (CS1 labs)
+     Example: A 300-student lab submits add.c / sum_array.c. The instructor drops the rules
+     file and test folder next to the submissions and batch-grades them with `python
+     manage.py grade submissions/*.c --rules rules/add_two_integers.json` in a few minutes.
+     Benefit: Every student gets the same rubric and a per-metric breakdown with the exact
+     failing input (e.g. 2147483647 1 -> expected 2147483648) instead of a bare mark.
+  2. Coding-interview and hiring screens
+     Example: A company screens 500 candidates on 'sum an array safely in O(n)'. Candidates
+     with an O(n^2) nested loop are separated by the timing curve, and those with int
+     accumulators by the int_overflow corner cases.
+     Benefit: Fast first-round filtering where every rejection can be justified metric by
+     metric with stored evidence.
+  3. Plagiarism and LLM-copy triage
+     Example: Two submissions reach 0.93 abstract-structure similarity (> 0.85 threshold)
+     although every variable was renamed and a for-loop rewritten as a while-loop; a third
+     matches a qwen3-generated solution. Only these are flagged.
+     Benefit: Instructors review a handful of flagged pairs instead of reading all
+     submissions.
+  4. Self-paced practice with instant feedback
+     Example: A student uploads sum_leak.c at midnight; the report shows 'memory-leak at
+     line 14: 400 bytes leaked (macOS leaks)' and a WHY/AI-tutor explanation of the failing
+     case, so they fix it before the deadline.
+     Benefit: Teaching-assistant style feedback (ASan/UBSan, leaks, counterexamples)
+     available 24/7 without staff time.
+
+Limits of this report:
+  1. Tests cannot prove correctness
+     Example: A submission that special-cases the inputs it has seen (e.g. `if (a == 7 && b
+     == 5) puts("12");` for every hidden test) or that only fails for n = 99991 passes all
+     hidden tests and all generated corner cases and gets a full correctness score.
+     Mitigation: Seeded random + LLM-proposed counter-tests are judged against the reference
+     solution, but coverage is still finite; keep hidden tests secret and rotate them.
+  2. Timing-based complexity is unreliable for small inputs
+     Example: An O(n^2) solution on sizes [1, 10, 100] runs in < 1 ms at every size; the
+     curve is flat, so the agent falls back to static loop nesting. A loop like `for (i = 0;
+     i < 3; i++)` is counted as O(n) nesting and a recursive merge sort is treated as
+     possibly exponential, giving a wrong complexity verdict.
+     Mitigation: Use large sizes (e.g. 10^3..10^6) in the rules, and min-of-N CPU time;
+     treat the complexity score as advisory near class boundaries.
+  3. Similarity cannot judge tiny programs and can miss semantic rewrites
+     Example: For add_two_integers almost every token k-gram is shared with the reference
+     solution, so a copied 6-line program is reported as 'too little unique code to judge'
+     and gets 10/10 originality. Conversely, a copy translated into a different algorithm
+     (recursion instead of a loop) scores low similarity and is not flagged.
+     Mitigation: Base-code exclusion avoids false positives, but originality is only
+     meaningful for programs with real logic; flags require human review, never automatic
+     penalties.
+  4. Verdicts depend on the compiler and platform
+     Example: `while (b != 0) { s += 1; }` never terminates when b != 0, but clang -O2 is
+     allowed (C11 6.8.5p6) to delete the side-effect-free loop, so the smoke run finishes in
+     6 ms and the agent reports a wrong answer instead of an infinite loop. On macOS
+     RLIMIT_AS is ignored, so the memory cap is enforced by polling: a program that
+     allocates 200 MB and exits within ~5 ms can pass a 64 MB limit, and leaks are only
+     checked (with `leaks`) on the first two inputs.
+     Mitigation: Grade on Linux in a container (RLIMIT_AS, LeakSanitizer/valgrind), pin
+     compiler + flags in the rules; tool_versions are recorded in every report.

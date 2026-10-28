@@ -1,0 +1,486 @@
+{
+  "submission": "sum_ai.c",
+  "submission_sha256": "fa595436320670c9678b2dd336bdc1f51a1cecaaaedbcc06f8f7ff7b98bbb48a",
+  "problem": "sum_array",
+  "rules_file": "/Users/harsha_vrdn/Dev/autograder/rules/sum_array.json",
+  "rules_hash": "sha256:7ec8b574d943d443477b8e848f96cd0d1ff7de37eb6053391a014782d3887ae3",
+  "inputs_hash": "sha256:65d0fb6f8f09b641043036a705d9aac8daa08da0053e270019747f628391fc7c",
+  "grade": 85.5,
+  "max_grade": 100,
+  "status": "graded",
+  "first_pass": {
+    "compiled": true,
+    "compile_warnings": 0,
+    "compile_errors": [],
+    "smoke_ok": true,
+    "suspected_infinite_loop": false,
+    "crashes_on_sample": false,
+    "unsafe_calls": [],
+    "static": {
+      "has_main": true,
+      "reads_input": true,
+      "writes_output": true,
+      "returns_in_main": true
+    },
+    "compile_command": "cc -O2 -Wall -Wextra -std=c11 main.c -o sub_main -lm",
+    "compile_failed": false,
+    "smoke": {
+      "verdict": "OK",
+      "status": "exit 0",
+      "cpu_s": 0.0026,
+      "max_rss_mb": 1.56,
+      "matches_sample": true
+    }
+  },
+  "metrics": [
+    {
+      "name": "correctness",
+      "analyzer": "io_tests",
+      "weight": 0.3,
+      "score": 1.0,
+      "contribution": 30.0,
+      "verdict": "8 of 8 tests pass",
+      "feedback": "8/8 tests pass.",
+      "evidence": {
+        "tests_passed": 8,
+        "tests_total": 8,
+        "per_test": [
+          {
+            "test": "01",
+            "verdict": "AC",
+            "cpu_s": 0.003,
+            "wall_s": 0.0056,
+            "max_rss_mb": 1.56
+          },
+          {
+            "test": "02",
+            "verdict": "AC",
+            "cpu_s": 0.0024,
+            "wall_s": 0.0051,
+            "max_rss_mb": 1.56
+          },
+          {
+            "test": "03",
+            "verdict": "AC",
+            "cpu_s": 0.0026,
+            "wall_s": 0.0049,
+            "max_rss_mb": 1.56
+          },
+          {
+            "test": "04",
+            "verdict": "AC",
+            "cpu_s": 0.0025,
+            "wall_s": 0.0049,
+            "max_rss_mb": 1.56
+          },
+          {
+            "test": "05",
+            "verdict": "AC",
+            "cpu_s": 0.0025,
+            "wall_s": 0.0049,
+            "max_rss_mb": 1.56
+          },
+          {
+            "test": "06",
+            "verdict": "AC",
+            "cpu_s": 0.0024,
+            "wall_s": 0.0049,
+            "max_rss_mb": 1.56
+          },
+          {
+            "test": "07",
+            "verdict": "AC",
+            "cpu_s": 0.0028,
+            "wall_s": 0.005,
+            "max_rss_mb": 1.56
+          },
+          {
+            "test": "08",
+            "verdict": "AC",
+            "cpu_s": 0.0142,
+            "wall_s": 0.0178,
+            "max_rss_mb": 1.56
+          }
+        ],
+        "compare_mode": "tokens"
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "syntax",
+      "analyzer": "compiler_warnings",
+      "weight": 0.05,
+      "score": 1.0,
+      "contribution": 5.0,
+      "verdict": "clean",
+      "feedback": "Compiles cleanly.",
+      "evidence": {
+        "warnings": [],
+        "flags": "-Wall -Wextra -std=c11",
+        "would_fail_werror": false
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "structure",
+      "analyzer": "static_analysis",
+      "weight": 0.05,
+      "score": 0.9,
+      "contribution": 4.5,
+      "verdict": "All logic is in a single block (main only).",
+      "feedback": "All logic is in a single block (main only).",
+      "evidence": {
+        "functions": [
+          {
+            "name": "main",
+            "cyclomatic": 2,
+            "nloc": 14,
+            "length": 16,
+            "start_line": 4,
+            "params": 0
+          }
+        ],
+        "max_cyclomatic": 8,
+        "max_function_length": 40,
+        "comment_count": 2,
+        "globals": [],
+        "cppcheck": [],
+        "deductions": [
+          {
+            "points": 0.1,
+            "reason": "All logic is in a single block (main only)."
+          }
+        ]
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "modularity",
+      "analyzer": "function_split",
+      "weight": 0.05,
+      "score": 0.3,
+      "contribution": 1.5,
+      "verdict": "only main() is defined",
+      "feedback": "1 function(s) defined (main); expected at least 2. Only main() is defined.",
+      "evidence": {
+        "functions_defined": 1,
+        "expected_min": 2,
+        "functions": [
+          "main"
+        ],
+        "main_share": 1.0,
+        "unused": []
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "logical",
+      "analyzer": "edge_case_runner",
+      "weight": 0.15,
+      "score": 1.0,
+      "contribution": 15.0,
+      "verdict": "all corner cases pass",
+      "feedback": "26/26 corner cases pass.",
+      "evidence": {
+        "oracle": "reference_solution",
+        "per_category": {
+          "zero": {
+            "passed": 2,
+            "total": 2
+          },
+          "empty": {
+            "passed": 1,
+            "total": 1
+          },
+          "single": {
+            "passed": 2,
+            "total": 2
+          },
+          "negatives": {
+            "passed": 4,
+            "total": 4
+          },
+          "int_overflow": {
+            "passed": 5,
+            "total": 5
+          },
+          "boundaries": {
+            "passed": 4,
+            "total": 4
+          },
+          "whitespace": {
+            "passed": 3,
+            "total": 3
+          },
+          "large": {
+            "passed": 1,
+            "total": 1
+          },
+          "llm": {
+            "passed": 4,
+            "total": 4
+          }
+        },
+        "cases_run": 26,
+        "llm": {
+          "used": true,
+          "model": "qwen3:4b",
+          "cached": true,
+          "proposed": 4,
+          "accepted": 4,
+          "rejected_invalid": 0
+        }
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "complexity",
+      "analyzer": "complexity_estimator",
+      "weight": 0.15,
+      "score": 1.0,
+      "contribution": 15.0,
+      "verdict": "O(n) confirmed (required O(n))",
+      "feedback": "Estimated O(n) (log-log slope 0.65); static analysis: max loop nesting 1. Required O(n).",
+      "evidence": {
+        "required": "O(n)",
+        "estimated": "O(n)",
+        "timings": [
+          {
+            "n": 20000,
+            "cpu_s": 0.0034,
+            "max_rss_mb": 1.56
+          },
+          {
+            "n": 80000,
+            "cpu_s": 0.007,
+            "max_rss_mb": 1.56
+          },
+          {
+            "n": 320000,
+            "cpu_s": 0.0205,
+            "max_rss_mb": 1.56
+          }
+        ],
+        "slope": 0.648,
+        "conclusive": true,
+        "timed_out_at": null,
+        "crashed_at": null,
+        "static_estimate": "O(n)",
+        "static_reason": "max loop nesting 1"
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "memory_safety",
+      "analyzer": "sanitizer_run",
+      "weight": 0.1,
+      "score": 1.0,
+      "contribution": 10.0,
+      "verdict": "ASan/UBSan clean",
+      "feedback": "No ASan/UBSan diagnostics on 8 input(s); no leaks (macOS leaks).",
+      "evidence": {
+        "inputs_checked": 8,
+        "issues": [],
+        "leak_check": {
+          "tool": "macOS leaks",
+          "leaked_bytes": 0
+        },
+        "flags": "-fsanitize=address,undefined"
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "readability",
+      "analyzer": "llm_review",
+      "weight": 0.05,
+      "score": 0.9,
+      "contribution": 4.5,
+      "verdict": "Descriptive variable names (count, total, value), Helpful co",
+      "feedback": "Readability 9/10: Descriptive variable names (count, total, value); Helpful comments on program purpose and running total; Consistent 4\u2011space indentation and clear spacing around operators; Overall structure is easy to follow.",
+      "evidence": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-120b",
+        "temperature": 0.0,
+        "seed": 42,
+        "cached": true,
+        "raw_response": "{\"score\":9,\"reasons\":[\"Descriptive variable names (count, total, value)\",\"Helpful comments on program purpose and running total\",\"Consistent 4\u2011space indentation and clear spacing around operators\",\"Overall structure is easy to follow\"],\"suggestions\":[\"Add a brief comment before the loop to explain its purpose (e.g., line 10)\",\"Consider renaming 'idx' to a more conventional loop variable like 'i' for clarity (line 9)\"]}"
+      },
+      "skipped": false,
+      "unavailable": false
+    },
+    {
+      "name": "originality",
+      "analyzer": "similarity_flag",
+      "weight": 0.1,
+      "score": 0.0,
+      "contribution": 0.0,
+      "verdict": "FLAGGED: 1.00 vs qwen3_4b_seed1.c",
+      "feedback": "Structure is 100% similar to corpus/llm_generated/sum_array/qwen3_4b_seed1.c (an LLM-generated solution). Flagged for manual review.",
+      "evidence": {
+        "max_similarity": 1.0,
+        "threshold": 0.85,
+        "judgeable": true,
+        "unique_kgrams": 33,
+        "abstract_tokens": 59,
+        "base_kgrams_excluded": 12,
+        "top_matches": [
+          {
+            "path": "corpus/llm_generated/sum_array/qwen3_4b_seed1.c",
+            "origin": "llm",
+            "similarity": 1.0,
+            "token_jaccard": 1.0,
+            "skeleton_ratio": 1.0
+          },
+          {
+            "path": "corpus/llm_generated/sum_array/qwen3_4b_seed2.c",
+            "origin": "llm",
+            "similarity": 1.0,
+            "token_jaccard": 1.0,
+            "skeleton_ratio": 1.0
+          },
+          {
+            "path": "corpus/llm_generated/sum_array/qwen3_4b_seed3.c",
+            "origin": "llm",
+            "similarity": 1.0,
+            "token_jaccard": 1.0,
+            "skeleton_ratio": 1.0
+          },
+          {
+            "path": "submissions/sum_array/sum_fixed_buffer.c",
+            "origin": "peer",
+            "similarity": 0.377,
+            "token_jaccard": 0.2,
+            "skeleton_ratio": 0.909
+          },
+          {
+            "path": "submissions/sum_array/sum_copy.c",
+            "origin": "peer",
+            "similarity": 0.324,
+            "token_jaccard": 0.254,
+            "skeleton_ratio": 0.533
+          }
+        ],
+        "corpus_size": 9,
+        "corpus_hash": "f546b6eaf6af399a",
+        "llm_reference": {
+          "used": true,
+          "files": 3,
+          "generated_now": 0,
+          "model": "qwen3:4b"
+        }
+      },
+      "skipped": false,
+      "unavailable": false
+    }
+  ],
+  "failures": [],
+  "flags": [
+    {
+      "metric": "originality",
+      "code": "suspected_llm_copy",
+      "message": "Similarity 1.00 with corpus/llm_generated/sum_array/qwen3_4b_seed1.c (threshold 0.85)",
+      "match": "corpus/llm_generated/sum_array/qwen3_4b_seed1.c",
+      "similarity": 1.0
+    }
+  ],
+  "suggestions": [
+    "Move the core computation into its own function (e.g. a helper that takes the inputs and returns the result) and call it from main().",
+    "All logic is in a single block (main only).",
+    "Add a brief comment before the loop to explain its purpose (e.g., line 10)",
+    "Consider renaming 'idx' to a more conventional loop variable like 'i' for clarity (line 9)"
+  ],
+  "profile": {
+    "tests": {
+      "max_cpu_s": 0.0142,
+      "max_wall_s": 0.0178,
+      "max_rss_mb": 1.56
+    },
+    "scaling": [
+      {
+        "n": 20000,
+        "cpu_s": 0.0034,
+        "max_rss_mb": 1.56
+      },
+      {
+        "n": 80000,
+        "cpu_s": 0.007,
+        "max_rss_mb": 1.56
+      },
+      {
+        "n": 320000,
+        "cpu_s": 0.0205,
+        "max_rss_mb": 1.56
+      }
+    ]
+  },
+  "usefulness_limitations": {
+    "usefulness": [
+      {
+        "use_case": "Large programming courses (CS1 labs)",
+        "example": "A 300-student lab submits add.c / sum_array.c. The instructor drops the rules file and test folder next to the submissions and batch-grades them with `python manage.py grade submissions/*.c --rules rules/add_two_integers.json` in a few minutes.",
+        "benefit": "Every student gets the same rubric and a per-metric breakdown with the exact failing input (e.g. 2147483647 1 -> expected 2147483648) instead of a bare mark."
+      },
+      {
+        "use_case": "Coding-interview and hiring screens",
+        "example": "A company screens 500 candidates on 'sum an array safely in O(n)'. Candidates with an O(n^2) nested loop are separated by the timing curve, and those with int accumulators by the int_overflow corner cases.",
+        "benefit": "Fast first-round filtering where every rejection can be justified metric by metric with stored evidence."
+      },
+      {
+        "use_case": "Plagiarism and LLM-copy triage",
+        "example": "Two submissions reach 0.93 abstract-structure similarity (> 0.85 threshold) although every variable was renamed and a for-loop rewritten as a while-loop; a third matches a qwen3-generated solution. Only these are flagged.",
+        "benefit": "Instructors review a handful of flagged pairs instead of reading all submissions."
+      },
+      {
+        "use_case": "Self-paced practice with instant feedback",
+        "example": "A student uploads sum_leak.c at midnight; the report shows 'memory-leak at line 14: 400 bytes leaked (macOS leaks)' and a WHY/AI-tutor explanation of the failing case, so they fix it before the deadline.",
+        "benefit": "Teaching-assistant style feedback (ASan/UBSan, leaks, counterexamples) available 24/7 without staff time."
+      }
+    ],
+    "limitations": [
+      {
+        "limitation": "Tests cannot prove correctness",
+        "example": "A submission that special-cases the inputs it has seen (e.g. `if (a == 7 && b == 5) puts(\"12\");` for every hidden test) or that only fails for n = 99991 passes all hidden tests and all generated corner cases and gets a full correctness score.",
+        "mitigation": "Seeded random + LLM-proposed counter-tests are judged against the reference solution, but coverage is still finite; keep hidden tests secret and rotate them."
+      },
+      {
+        "limitation": "Timing-based complexity is unreliable for small inputs",
+        "example": "An O(n^2) solution on sizes [1, 10, 100] runs in < 1 ms at every size; the curve is flat, so the agent falls back to static loop nesting. A loop like `for (i = 0; i < 3; i++)` is counted as O(n) nesting and a recursive merge sort is treated as possibly exponential, giving a wrong complexity verdict.",
+        "mitigation": "Use large sizes (e.g. 10^3..10^6) in the rules, and min-of-N CPU time; treat the complexity score as advisory near class boundaries."
+      },
+      {
+        "limitation": "Similarity cannot judge tiny programs and can miss semantic rewrites",
+        "example": "For add_two_integers almost every token k-gram is shared with the reference solution, so a copied 6-line program is reported as 'too little unique code to judge' and gets 10/10 originality. Conversely, a copy translated into a different algorithm (recursion instead of a loop) scores low similarity and is not flagged.",
+        "mitigation": "Base-code exclusion avoids false positives, but originality is only meaningful for programs with real logic; flags require human review, never automatic penalties."
+      },
+      {
+        "limitation": "Verdicts depend on the compiler and platform",
+        "example": "`while (b != 0) { s += 1; }` never terminates when b != 0, but clang -O2 is allowed (C11 6.8.5p6) to delete the side-effect-free loop, so the smoke run finishes in 6 ms and the agent reports a wrong answer instead of an infinite loop. On macOS RLIMIT_AS is ignored, so the memory cap is enforced by polling: a program that allocates 200 MB and exits within ~5 ms can pass a 64 MB limit, and leaks are only checked (with `leaks`) on the first two inputs.",
+        "mitigation": "Grade on Linux in a container (RLIMIT_AS, LeakSanitizer/valgrind), pin compiler + flags in the rules; tool_versions are recorded in every report."
+      }
+    ]
+  },
+  "notes": [],
+  "tool_versions": {
+    "cc": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+    "lizard": "1.24.3",
+    "python": "3.14.6",
+    "platform": "darwin-arm64",
+    "ollama_model": "qwen3:4b",
+    "groq_model": "openai/gpt-oss-120b",
+    "engine": "1.0.0"
+  },
+  "reproducibility": {
+    "engine_version": "1.0.0",
+    "seeded_generation": true,
+    "llm_cache_dir": ".cache/llm",
+    "offline": false
+  },
+  "duration_s": 4.3
+}
